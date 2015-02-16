@@ -1,0 +1,23 @@
+{
+	"name": "mrcore/appstub",
+	"type": "library",
+	"description": "Mrcore Appstub Application",
+	"keywords": ["mrcore", "framework", "application", "app", "workbench", "laravel"],
+	"homepage": "http://github.com/mreschke/mrcore-appstub",
+	"license": "MIT",
+	"support": {
+		"issues": "https://github.com/mreschke/mrcore-appstub/issues"
+	},
+	"authors": [
+		{
+			"name": "Matthew Reschke",
+			"email": "mail@mreschke.com",
+			"homepage": "http://mreschke.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Mrcore\\Apps\\Appstub\\": ""
+		}
+	}
+}
