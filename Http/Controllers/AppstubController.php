@@ -1,4 +1,4 @@
-<?php namespace Mrcore\Apps\Mrcore\Appstub\Http\Controllers;
+<?php namespace Mrcore\Appstub\Http\Controllers;
 
 use View;
 use Mrcore;

@@ -1,4 +1,4 @@
-<?php namespace Mrcore\Apps\Mrcore\Appstub\Providers;
+<?php namespace Mrcore\Appstub\Providers;
 
 use Module;
 use Mrcore\Modules\Foundation\Support\ServiceProvider;
