@@ -3,8 +3,8 @@
 use View;
 use Mrcore;
 
-class AppstubController extends Controller {
-
+class AppstubController extends Controller
+{
 	/**
 	 * Display the welcome page
 	 *
@@ -12,21 +12,7 @@ class AppstubController extends Controller {
 	 */
 	public function getIndex()
 	{
-
-
-
-		#eval(\API::snippet('email'));
-
-
-
-
-
-
-
-		$post = Mrcore::post()->prepare();
-		return View::make('appstub::welcome', [
-			'post' => $post
-		]);
+		return View::make('appstub::welcome');
 	}
 
 }

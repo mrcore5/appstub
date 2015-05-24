@@ -1,0 +1,2 @@
+base="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+$base/../../../../System/artisan migrate --database appstub --path ../Apps/Mrcore/Appstub/Database/Migrations/

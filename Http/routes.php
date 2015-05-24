@@ -11,6 +11,32 @@
 |
 */
 
+// App global view composer
+View::composer('*', 'Mrcore\Appstub\Http\Composers\ViewComposer');
+
+// Filters
+Route::filter('auth.admin', function() {
+	if (!Auth::admin()) {
+		return Response::denied();
+	}
+});
+
+// Filtered Admin Routes
+Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function() {
+
+	Route::get('/', function() {
+		return "Welcome to admin";
+	});
+
+});
+
+// Test
+Route::get('/test', function() {
+	return Mrcore\Appstub\Support\Test::hi();
+});
+
+// Route controllers must be last
 Route::controllers([
 	'/' => 'AppstubController'
 ]);
+

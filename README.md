@@ -1,2 +1,3 @@
-# mrcore-appstub
-Mrcore Appstub Application
+# Welcome
+
+Welcome to mRcore Application Framework

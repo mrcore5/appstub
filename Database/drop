@@ -1,0 +1,1 @@
+mysql -uroot -p -e 'drop database if exists appstub; create database appstub'
