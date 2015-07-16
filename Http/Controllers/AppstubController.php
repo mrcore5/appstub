@@ -18,7 +18,7 @@ class AppstubController extends Controller
 			'key' => 'dashboard'
 		];
 
-		return View::make('appstub::sample-app');
+		return View::make('appstub::sample-app', compact('page'));
 	}
 
 }
