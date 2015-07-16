@@ -1,4 +1,4 @@
-<?php namespace Jplata\Sample\Http\Composers;
+<?php namespace Mrcore\Appstub\Http\Composers;
 
 use Mrcore;
 use Illuminate\Contracts\View\View;
