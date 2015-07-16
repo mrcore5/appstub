@@ -13,12 +13,12 @@ class AppstubController extends Controller
 	public function getIndex()
 	{
 		$page = (object) [
-			'title' => 'Sample Application',
-			'subtitle' => 'Your Sample Application',
+			'title' => 'mRCore Application',
+			'subtitle' => 'Your mRCore Application',
 			'key' => 'dashboard'
 		];
 
-		return View::make('appstub::sample-app', compact('page'));
+		return View::make('appstub::sample-page');
 	}
 
 }
