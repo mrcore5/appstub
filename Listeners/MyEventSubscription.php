@@ -14,6 +14,7 @@ class MyEventSubscription
 	{
 		#extract((array) $payload);
 		#echo $someCrazyData
+		#$this->dispatch(new DoSomething('someData'));
 	}
 
 	/**

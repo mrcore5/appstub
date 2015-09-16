@@ -6,11 +6,6 @@ use Config;
 use Exception;
 use Illuminate\Console\Command;
 
-/**
- * Dynatron Vfi Db Command
- * @copyright Dynatron Software, Inc.
- * @author Matthew Reschke <mreschke@dynatronsoftware.com>
- */
 class DbCommand extends Command
 {
 	protected $name = 'Db';
