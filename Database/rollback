@@ -1,2 +1,0 @@
-base="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-$base/../../../../System/artisan migrate:rollback --database=appstub
