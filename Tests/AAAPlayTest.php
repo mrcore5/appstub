@@ -1,5 +1,6 @@
 <?php namespace Mrcore\Appstub;
 
+use TestCase;
 use Mockery as m;
 
 class AAAPlayTest extends TestCase
@@ -18,7 +19,7 @@ class AAAPlayTest extends TestCase
 	protected function playOther()
 	{
 		// Run with: myapp test play-other
-		dump("Test Play Other")
+		dump("Test Play Other");
 	}
 
 	public function testEmpty() {}
