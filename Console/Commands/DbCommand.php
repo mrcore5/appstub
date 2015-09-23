@@ -13,7 +13,7 @@ class DbCommand extends Command
 	protected $version = '1.0.0';
 	protected $description = 'Db Helper Commands';
 	protected $signature = 'mrcore:appstub:db
-		{action : migrate, seed, rollback, refresh},
+		{action : migrate, seed, reseed, rollback, refresh},
 	';
 
 	/**
@@ -70,6 +70,18 @@ class DbCommand extends Command
 			'--class' => $this->seeder
 		]);
 	}
+
+    /**
+     * Refresh then seed database
+     */
+    protected function reseed()
+    {
+        if (App::environment() === 'production') {
+            throw new Exception("You cannot seed in production");
+        }
+        $this->refresh();
+        $this->seed();
+    }
 
 	/**
 	 * Rollback migrations
