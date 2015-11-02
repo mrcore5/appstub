@@ -61,9 +61,12 @@ class AppstubServiceProvider extends ServiceProvider
 		// Register Other Dynamic Service Providers
 		#$this->app->register('Mrcore\Appstub\Providers\OtherServiceProvider');
 
-		// Register Middleware
+		// Register Global Middleware
 		#$kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
 		#$kernel->pushMiddleware('Mrcore\Appstub\Http\Middleware\DoSomething');
+
+		// Register Route Based Middleware
+		#Route::middleware('auth.appstub', 'Mrcore\Appstub\Http\Middleware\Authenticate');
 
 		// Register Artisan Commands
 		#$this->commands('Mrcore\Appstub\Console\Commands\DbCommand');
