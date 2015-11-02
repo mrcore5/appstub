@@ -1,5 +1,6 @@
 <?php namespace Mrcore\Appstub\Providers;
 
+use Gate;
 use Event;
 use Module;
 use Illuminate\Foundation\AliasLoader;
@@ -26,6 +27,9 @@ class AppstubServiceProvider extends ServiceProvider
 
 		// Event Subscribers
 		#Event::subscribe('Mrcore\Appstub\Listeners\MyEventSubscription');
+
+		// Boot Policies
+		#$this->bootPolicies();
 	}
 
 	/**
@@ -42,8 +46,8 @@ class AppstubServiceProvider extends ServiceProvider
 		#$facade = AliasLoader::getInstance();
 		#$facade->alias('Appstub', 'Mrcore\Appstub\Facades\Appstub');
 
-		// Setup Testing Environment
-		#$this->setupTestingEnvironment();
+		// Register Testing Environment
+		#$this->registerTestingEnvironment();
 
 		// Bind and Alias Helper
 		#$alias = function($abstract, $aliases = []) {
@@ -65,12 +69,30 @@ class AppstubServiceProvider extends ServiceProvider
 		#$this->commands('Mrcore\Appstub\Console\Commands\DbCommand');
 	}
 
+	public function bootPolicies()
+	{
+		// Define permissions (closure or Class@method)
+		#Gate::define('update-post', function($user, $post) {
+		#	return $user->id === $post->user_id;
+		#});
+
+		#Gate::before(function ($user, $ability) {
+		#	if ($user->isSuperAdmin()) {
+		#		return true;
+		#	}
+		#});
+		# ->after() is also available
+
+		// Or define an entire policy class
+		#Gate::policy(App\Post::class, App\Policies\PostPolicy::class);
+	}
+
 	/**
 	 * Running in test environment.
 	 *
 	 * @return void
 	 */
-	public function setupTestingEnvironment()
+	public function registerTestingEnvironment()
 	{
 		// Testing - Entire fake entity and repository for testing
 		if ($this->app->environment('testing')) {
