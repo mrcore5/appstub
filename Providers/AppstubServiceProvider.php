@@ -2,8 +2,10 @@
 
 use Gate;
 use Event;
+use Layout;
 use Module;
-use Illuminate\Foundation\AliasLoader;
+use Illuminate\Routing\Router;
+use Illuminate\Contracts\Http\Kernel;
 use Mrcore\Modules\Foundation\Support\ServiceProvider;
 
 class AppstubServiceProvider extends ServiceProvider
@@ -20,16 +22,25 @@ class AppstubServiceProvider extends ServiceProvider
 	 *
 	 * @return void
 	 */
-	public function boot()
+	public function boot(Kernel $kernel, Router $router)
 	{
 		// Mrcore Module Tracking
 		Module::trace(get_class(), __function__);
 
-		// Event Subscribers
-		#Event::subscribe('Mrcore\Appstub\Listeners\MyEventSubscription');
+		// Register resources
+		$this->registerResources();
 
-		// Boot Policies
-		#$this->bootPolicies();
+		// Register Policies
+		$this->registerPolicies();
+
+		// Register global and route based middleware
+		$this->registerMiddleware($kernel, $router);
+
+		// Register event listeners and subscriptions
+		$this->registerListeners();
+
+		// Register mrcore layout overrides
+		$this->registerLayout();
 	}
 
 	/**
@@ -42,37 +53,66 @@ class AppstubServiceProvider extends ServiceProvider
 		// Mrcore Module Tracking
 		Module::trace(get_class(), __function__);
 
-		// Register Facades
-		#$facade = AliasLoader::getInstance();
-		#$facade->alias('Appstub', 'Mrcore\Appstub\Facades\Appstub');
+		// Register facades
+		#class_alias('Mrcore\Appstub\Facades\Appstub', 'Appstub');
 
-		// Register Testing Environment
-		#$this->registerTestingEnvironment();
+		// Register configs
+		$this->registerConfigs();
 
-		// Bind and Alias Helper
-		#$alias = function($abstract, $aliases = []) {
-		#	foreach ($aliases as $alias) {$this->app->alias($abstract, $alias);}
-		#};
-		#$alias('Mrcore\Appstub\Appstub', ['Mrcore\Appstub']);
+		// Register IoC bind aliases
+		#$this->app->alias(Mrcore\Appstub\Appstub::class, Mrcore\Appstub::class)
 
-		// Merge config
-		#$this->mergeConfigFrom(__DIR__.'/../Config/appstub.php', 'mrcore.appstub');
+		// Register other service providers
+		#$this->app->register(Mrcore\Appstub\Providers\OtherServiceProvider::class);
 
-		// Register Other Dynamic Service Providers
-		#$this->app->register('Mrcore\Appstub\Providers\OtherServiceProvider');
+		// Register artisan commands
+		$this->registerCommands();
 
-		// Register Global Middleware
-		#$kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
-		#$kernel->pushMiddleware('Mrcore\Appstub\Http\Middleware\DoSomething');
-
-		// Register Route Based Middleware
-		#Route::middleware('auth.appstub', 'Mrcore\Appstub\Http\Middleware\Authenticate');
-
-		// Register Artisan Commands
-		#$this->commands('Mrcore\Appstub\Console\Commands\DbCommand');
+		// Register testing environment
+		$this->registerTestingEnvironment();
 	}
 
-	public function bootPolicies()
+	/**
+	 * Define the resources used by mrcore.
+	 * 
+	 * @return void
+	 */
+	protected function registerResources()
+	{
+		if (!$this->app->runningInConsole()) return;
+		/*
+		// Register additional css assets with mrcore Layout
+		Layout::css('css/wiki-bundle.css');
+
+		// App base path
+		$path = realpath(__DIR__.'/../');
+
+		// Config publishing rules
+		// ./artisan vendor:publish --tag="mrcore.appstub.configs"
+		$this->publishes([
+			"$path/Config" => base_path('/config/mrcore'),
+		], 'mrcore.appstub.configs');
+
+		// Migration publishing rules
+		// ./artisan vendor:publish --tag="mrcore.appstub.migrations"
+		$this->publishes([
+			"$path/Database/Migrations" => base_path('/database/migrations'),
+		], 'mrcore.appstub.migrations');
+
+		// Seed publishing rules
+		// ./artisan vendor:publish --tag="mrcore.appstub.seeds"
+		$this->publishes([
+			"$path/Database/Seeds" => base_path('/database/seeds'),
+		], 'mrcore.appstub.seeds');	
+		*/
+	}
+
+	/**
+	 * Register permission policies.
+	 * 
+	 * @return void
+	 */
+	public function registerPolicies()
 	{
 		// Define permissions (closure or Class@method)
 		#Gate::define('update-post', function($user, $post) {
@@ -91,13 +131,84 @@ class AppstubServiceProvider extends ServiceProvider
 	}
 
 	/**
-	 * Running in test environment.
+	 * Register global and route based middleware.
+	 *
+	 * @param Illuminate\Contracts\Http\Kernel $kernel
+	 * @param \Illuminate\Routing\Router $router
+	 * @return  void
+	 */
+	protected function registerMiddleware(Kernel $kernel, Router $router)
+	{
+		// Register global middleware
+		#$kernel->pushMiddleware('Mrcore\Appstub\Http\Middleware\DoSomething');
+
+		// Register route based middleware
+		#$router->middleware('auth.appstub', 'Mrcore\Appstub\Http\Middleware\Authenticate');
+	}
+
+	/**
+	 * Register event listeners and subscriptions.
+	 * 
+	 * @return void
+	 */
+	protected function registerListeners()
+	{
+		// Login event listener
+		#Event::listen('auth.login', function($user) {
+			//
+		#});
+
+		// Logout event subscriber
+		#Event::subscribe('Mrcore\Appstub\Listeners\MyEventSubscription');
+	}
+
+	/**
+	 * Register mrcore layout overrides.
+	 * 
+	 * @return void
+	 */
+	protected function registerLayout()
+	{
+		if ($this->app->runningInConsole()) return;
+
+		// Register additional css assets with mrcore Layout
+		#Layout::css('css/wiki-bundle.css');
+	}
+
+	/**
+	 * Register additional configs and merges.
+	 * 
+	 * @return void
+	 */
+	protected function registerConfigs()
+	{
+		// Append or overwrite configs
+		#config(['test' => 'hi']);
+
+		// Merge configs
+		#$this->mergeConfigFrom(__DIR__.'/../Config/appstub.php', 'mrcore.appstub');
+	}
+
+	/**
+	 * Register artisan commands.
+	 * @return void
+	 */
+	protected function registerCommands()
+	{
+		if (!$this->app->runningInConsole()) return;
+		$this->commands([
+			Mrcore\Appstub\Console\Commands\DbCommand::class
+		]);
+	}
+
+	/**
+	 * Register test environment overrides
 	 *
 	 * @return void
 	 */
 	public function registerTestingEnvironment()
 	{
-		// Testing - Entire fake entity and repository for testing
+		// Register testing environment
 		if ($this->app->environment('testing')) {
 			//
 		}
