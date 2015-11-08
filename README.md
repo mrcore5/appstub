@@ -22,6 +22,10 @@ To get an app started quickly you can run the wiki command
 This will create a folder `Apps/Mevendor/Appname` and git clone this app stub repo.  This repo
 is the template of a great wiki app.
 
+From there, you can wire up this app into a wiki post.  Create a new wiki post and goto the 
+advanced tab of the edit post page.  Enter a static route like `apps/myapp` and link new app in the
+workbench forge by entering `mevendor/appname`.  Save the post and you should see a nice new app!
+
 ## Contributing
 
 Thank you for considering contributing to the mRcore framework!  Fork and pull!
