@@ -25,6 +25,7 @@ class DbCommand extends Command
 	{
 		parent::__construct();
 		$this->connection = Config::get('database.connections.appstub');
+		$this->connection['name'] = Config::get('database.default');
 		$this->path = realpath(__DIR__.'/../../');
 		$this->relativePath = "../Apps/Mrcore/Appstub"; // relative to the artisan command
 		$this->seeder = 'AppstubSeeder';
@@ -52,7 +53,7 @@ class DbCommand extends Command
 	{
 		$this->createDatabase();
 		$this->call('migrate', [
-			'--database' => $this->connection['database'],
+			'--database' => $this->connection['name'],
 			'--path' => "$this->relativePath/Database/Migrations/"
 		]);
 	}
@@ -66,7 +67,7 @@ class DbCommand extends Command
 			throw new Exception("You cannot seed in production");
 		}
 		$this->call('db:seed', [
-			'--database' => $this->connection['database'],
+			'--database' => $this->connection['name'],
 			'--class' => $this->seeder
 		]);
 	}
@@ -89,7 +90,7 @@ class DbCommand extends Command
 	protected function rollback()
 	{
 		$this->call('migrate:rollback', [
-			'--database' => $this->connection['database']
+			'--database' => $this->connection['name']
 		]);
 	}
 
@@ -105,13 +106,28 @@ class DbCommand extends Command
 		$this->migrate();
 	}
 
+
 	/**
 	 * Create database if not exists
 	 */
 	protected function createDatabase()
 	{
+		// Laravel DB cannot connect without a valid database, so this is a chicken egg problem
+		// Use raw mysql to create the database
 		$conn = $this->connection;
-		DB::statement("CREATE DATABASE IF NOT EXISTS $conn[database]");
+		// Create connection
+		$handle = new \mysqli($conn['host'], $conn['username'], $conn['password']);
+		if ($handle->connect_error) {
+			dd("Connection failed: ".$handle->connect_error);
+		}
+		// Create database
+		$sql = "CREATE DATABASE IF NOT EXISTS $conn[database]";
+		if ($handle->query($sql) === TRUE) {
+			$this->info("Database $conn[database] created successfully");
+		} else {
+			dd("Error creating database $conn[database]: ".$handle->error);
+		}
+		$handle->close();
 	}
 
 }
