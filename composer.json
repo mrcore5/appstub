@@ -2,11 +2,11 @@
 	"name": "mrcore/appstub",
 	"type": "library",
 	"description": "Mrcore Appstub Application",
-	"keywords": ["mrcore", "framework", "application", "app", "workbench", "laravel"],
-	"homepage": "http://github.com/mreschke/mrcore-appstub",
+	"keywords": ["mrcore", "framework", "application", "app", "laravel"],
+	"homepage": "http://github.com/mrcore5/appstub",
 	"license": "MIT",
 	"support": {
-		"issues": "https://github.com/mreschke/mrcore-appstub/issues"
+		"issues": "https://github.com/mrcore5/appstub/issues"
 	},
 	"authors": [
 		{
