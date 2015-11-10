@@ -74,7 +74,7 @@ class AppstubServiceProvider extends ServiceProvider
 
 	/**
 	 * Define the resources used by mrcore.
-	 * 
+	 *
 	 * @return void
 	 */
 	protected function registerResources()
@@ -103,13 +103,13 @@ class AppstubServiceProvider extends ServiceProvider
 		// ./artisan vendor:publish --tag="mrcore.appstub.seeds"
 		$this->publishes([
 			"$path/Database/Seeds" => base_path('/database/seeds'),
-		], 'mrcore.appstub.seeds');	
+		], 'mrcore.appstub.seeds');
 		*/
 	}
 
 	/**
 	 * Register permission policies.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function registerPolicies()
@@ -148,7 +148,7 @@ class AppstubServiceProvider extends ServiceProvider
 
 	/**
 	 * Register event listeners and subscriptions.
-	 * 
+	 *
 	 * @return void
 	 */
 	protected function registerListeners()
@@ -164,7 +164,7 @@ class AppstubServiceProvider extends ServiceProvider
 
 	/**
 	 * Register mrcore layout overrides.
-	 * 
+	 *
 	 * @return void
 	 */
 	protected function registerLayout()
@@ -177,7 +177,7 @@ class AppstubServiceProvider extends ServiceProvider
 
 	/**
 	 * Register additional configs and merges.
-	 * 
+	 *
 	 * @return void
 	 */
 	protected function registerConfigs()
@@ -197,7 +197,7 @@ class AppstubServiceProvider extends ServiceProvider
 	{
 		if (!$this->app->runningInConsole()) return;
 		$this->commands([
-			Mrcore\Appstub\Console\Commands\DbCommand::class
+			\Mrcore\Appstub\Console\Commands\DbCommand::class
 		]);
 	}
 
