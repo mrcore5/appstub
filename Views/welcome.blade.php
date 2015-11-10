@@ -2,7 +2,7 @@
 @include('layout._partials.interior-navigation')
 
 @section('css')
-    @parent
+	@parent
 @stop
 
 @section('wb-content')
@@ -19,4 +19,3 @@
 @section('script')
 	@parent
 @stop
-

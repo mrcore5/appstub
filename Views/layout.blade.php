@@ -25,7 +25,7 @@
 @stop
 
 @section('content')
-   @yield('template')   
+	@yield('template')
 @stop
 
 @section('script')
