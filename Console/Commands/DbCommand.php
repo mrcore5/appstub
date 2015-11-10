@@ -1,20 +1,10 @@
 <?php namespace Mrcore\Appstub\Console\Commands;
 
-use DB;
-use App;
-use Config;
-use Exception;
-use Illuminate\Console\Command;
+use Mrcore\Modules\Foundation\Support\Migrations;
 
-class DbCommand extends Command
+class DbCommand extends Migrations
 {
-	protected $name = 'Db';
-	protected $package = 'Mrcore/Appstub';
-	protected $version = '1.0.0';
-	protected $description = 'Db Helper Commands';
-	protected $signature = 'mrcore:appstub:db
-		{action : migrate, seed, reseed, rollback, refresh},
-	';
+	protected $signature = 'mrcore:appstub:db';
 
 	/**
 	 * Create a new command instance.
@@ -23,111 +13,10 @@ class DbCommand extends Command
 	 */
 	public function __construct()
 	{
-		parent::__construct();
-		$this->connection = Config::get('database.connections.appstub');
-		$this->connection['name'] = Config::get('database.default');
-		$this->path = realpath(__DIR__.'/../../');
-		$this->relativePath = "../Apps/Mrcore/Appstub"; // relative to the artisan command
+		$this->connection = 'appstub'
 		$this->seeder = 'AppstubSeeder';
-	}
-
-	/**
-	 * Execute the console command.
-	 *
-	 * @return mixed
-	 */
-	public function handle()
-	{
-		$method = $this->argument('action');
-		if (method_exists($this, $method)) {
-			$this->$method();
-		} else {
-			$this->error("$method() method not found");
-		}
-	}
-
-	/**
-	 * Migrate database
-	 */
-	protected function migrate()
-	{
-		$this->createDatabase();
-		$this->call('migrate', [
-			'--database' => $this->connection['name'],
-			'--path' => "$this->relativePath/Database/Migrations/"
-		]);
-	}
-
-	/**
-	 * Seed database
-	 */
-	protected function seed()
-	{
-		if (App::environment() === 'production') {
-			throw new Exception("You cannot seed in production");
-		}
-		$this->call('db:seed', [
-			'--database' => $this->connection['name'],
-			'--class' => $this->seeder
-		]);
-	}
-
-    /**
-     * Refresh then seed database
-     */
-    protected function reseed()
-    {
-        if (App::environment() === 'production') {
-            throw new Exception("You cannot seed in production");
-        }
-        $this->refresh();
-        $this->seed();
-    }
-
-	/**
-	 * Rollback migrations
-	 */
-	protected function rollback()
-	{
-		$this->call('migrate:rollback', [
-			'--database' => $this->connection['name']
-		]);
-	}
-
-	/**
-	 * Refresh migrations (rollback all, then migrate)
-	 */
-	protected function refresh()
-	{
-		if (App::environment() === 'production') {
-			throw new Exception("You cannot rollback in production");
-		}
-		$this->rollback();
-		$this->migrate();
-	}
-
-
-	/**
-	 * Create database if not exists
-	 */
-	protected function createDatabase()
-	{
-		// Laravel DB cannot connect without a valid database, so this is a chicken egg problem
-		// Use raw mysql to create the database
-		$conn = $this->connection;
-		// Create connection
-		$handle = new \mysqli($conn['host'], $conn['username'], $conn['password']);
-		if ($handle->connect_error) {
-			dd("Connection failed: ".$handle->connect_error);
-		}
-		// Create database
-		$sql = "CREATE DATABASE IF NOT EXISTS $conn[database]";
-		if ($handle->query($sql) === TRUE) {
-			$this->info("Database $conn[database] created successfully");
-		} else {
-			dd("Error creating database $conn[database]: ".$handle->error);
-		}
-		$handle->close();
+		$this->path = ['vendor/mrcore/appstub', '../Apps/Mrcore/Appstub'];
+		parent::__construct();
 	}
 
 }
