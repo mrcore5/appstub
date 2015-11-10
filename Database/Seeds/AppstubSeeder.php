@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class VfiSeeder extends Seeder
+class AppstubSeeder extends Seeder
 {
 
 	/**
