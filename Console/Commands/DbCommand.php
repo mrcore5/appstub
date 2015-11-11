@@ -1,6 +1,6 @@
 <?php namespace Mrcore\Appstub\Console\Commands;
 
-use Mrcore\Modules\Foundation\Support\Migrations;
+use Mrcore\Foundation\Support\Migrations;
 
 class DbCommand extends Migrations
 {

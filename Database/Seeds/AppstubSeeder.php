@@ -16,7 +16,7 @@ class AppstubSeeder extends Seeder
 		Model::unguard();
 
 		// Order is Critical
-		$this->call('AppstubTestSeeder');
+		//$this->call('AppstubTestSeeder');
 	}
 
 }

@@ -6,7 +6,7 @@ use Layout;
 use Module;
 use Illuminate\Routing\Router;
 use Illuminate\Contracts\Http\Kernel;
-use Mrcore\Modules\Foundation\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 class AppstubServiceProvider extends ServiceProvider
 {
@@ -27,8 +27,8 @@ class AppstubServiceProvider extends ServiceProvider
 		// Mrcore Module Tracking
 		Module::trace(get_class(), __function__);
 
-		// Register resources
-		$this->registerResources();
+		// Register publishers
+		$this->registerPublishers();
 
 		// Register Policies
 		$this->registerPolicies();
@@ -73,11 +73,11 @@ class AppstubServiceProvider extends ServiceProvider
 	}
 
 	/**
-	 * Define the resources used by mrcore.
+	 * Define the published resources and configs.
 	 *
 	 * @return void
 	 */
-	protected function registerResources()
+	protected function registerPublishers()
 	{
 		if (!$this->app->runningInConsole()) return;
 		/*

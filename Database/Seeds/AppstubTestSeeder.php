@@ -7,6 +7,6 @@ class AppstubTestSeeder extends Seeder
 {
 	public function run()
 	{
-		Test::create(["key" => "test", "name" => "Test Entry"]);
+		//Test::create(["key" => "test", "name" => "Test Entry"]);
 	}
 }
