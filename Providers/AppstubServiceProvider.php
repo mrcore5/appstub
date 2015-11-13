@@ -197,7 +197,7 @@ class AppstubServiceProvider extends ServiceProvider
 	{
 		if (!$this->app->runningInConsole()) return;
 		$this->commands([
-			\Mrcore\Appstub\Console\Commands\DbCommand::class
+			\Mrcore\Appstub\Console\Commands\AppCommand::class
 		]);
 	}
 
