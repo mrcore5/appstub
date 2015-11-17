@@ -6,6 +6,7 @@ use Layout;
 use Module;
 use Illuminate\Routing\Router;
 use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 class AppstubServiceProvider extends ServiceProvider
@@ -54,16 +55,17 @@ class AppstubServiceProvider extends ServiceProvider
 		Module::trace(get_class(), __function__);
 
 		// Register facades
-		#class_alias('Mrcore\Appstub\Facades\Appstub', 'Appstub');
+		$facade = AliasLoader::getInstance();
+		$facade->alias('Appstub', \Mrcore\Appstub\Facades\Appstub::class);
 
 		// Register configs
 		$this->registerConfigs();
 
 		// Register IoC bind aliases
-		#$this->app->alias(Mrcore\Appstub\Appstub::class, Mrcore\Appstub::class)
+		#$this->app->alias(\Mrcore\Appstub\Appstub::class, \Mrcore\Appstub::class)
 
 		// Register other service providers
-		#$this->app->register(Mrcore\Appstub\Providers\OtherServiceProvider::class);
+		#$this->app->register(\Mrcore\Appstub\Providers\OtherServiceProvider::class);
 
 		// Register artisan commands
 		$this->registerCommands();
@@ -127,7 +129,7 @@ class AppstubServiceProvider extends ServiceProvider
 		# ->after() is also available
 
 		// Or define an entire policy class
-		#Gate::policy(App\Post::class, App\Policies\PostPolicy::class);
+		#Gate::policy(\App\Post::class, \App\Policies\PostPolicy::class);
 	}
 
 	/**
