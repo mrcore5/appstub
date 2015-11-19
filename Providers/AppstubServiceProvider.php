@@ -198,9 +198,9 @@ class AppstubServiceProvider extends ServiceProvider
 	protected function registerCommands()
 	{
 		if (!$this->app->runningInConsole()) return;
-		$this->commands([
-			\Mrcore\Appstub\Console\Commands\AppCommand::class
-		]);
+		#$this->commands([
+		#	\Mrcore\Appstub\Console\Commands\AppCommand::class
+		#]);
 	}
 
 	/**
