@@ -39,4 +39,3 @@ Route::get('/test', function() {
 Route::controllers([
 	'/' => 'AppstubController'
 ]);
-
