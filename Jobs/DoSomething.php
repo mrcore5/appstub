@@ -1,8 +1,6 @@
 <?php namespace Mrcore\Appstub\Jobs;
 
-use Illuminate\Contracts\Bus\SelfHandling;
-
-class DoSomething extends Job implements SelfHandling
+class DoSomething extends Job
 {
 	protected $someData;
 

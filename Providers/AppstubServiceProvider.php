@@ -55,8 +55,8 @@ class AppstubServiceProvider extends ServiceProvider
 		Module::trace(get_class(), __function__);
 
 		// Register facades
-		$facade = AliasLoader::getInstance();
-		$facade->alias('Appstub', \Mrcore\Appstub\Facades\Appstub::class);
+		#$facade = AliasLoader::getInstance();
+		#$facade->alias('Appstub', \Mrcore\Appstub\Facades\Appstub::class);
 
 		// Register configs
 		$this->registerConfigs();
