@@ -12,7 +12,7 @@
 */
 
 // App global view composer
-View::composer('*', 'Mrcore\Appstub\Http\Composers\ViewComposer');
+View::composer('appstub::layout', 'Mrcore\Appstub\Http\Composers\ViewComposer');
 
 // Filters
 Route::filter('auth.admin', function() {
