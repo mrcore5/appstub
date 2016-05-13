@@ -8,6 +8,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Console\Scheduling\Schedule;
 
 class AppstubServiceProvider extends ServiceProvider
 {
@@ -39,6 +40,9 @@ class AppstubServiceProvider extends ServiceProvider
 
 		// Register event listeners and subscriptions
 		$this->registerListeners();
+
+		// Register scheduled tasks
+		$this->registerSchedules();
 
 		// Register mrcore layout overrides
 		$this->registerLayout();
@@ -162,6 +166,31 @@ class AppstubServiceProvider extends ServiceProvider
 
 		// Logout event subscriber
 		#Event::subscribe('Mrcore\Appstub\Listeners\MyEventSubscription');
+	}
+
+	/**
+	 * Register the scheduled tasks
+	 *
+	 * @return void
+	 */
+	protected function registerSchedules()
+	{
+		// Register all task schedules for this hostname ONLY if running from the schedule:run command
+		/*if (app()->runningInConsole() && isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] == 'schedule:run') {
+
+			// Defer until after all providers booted, or the scheduler instance is removed from Illuminate\Foundation\Console\Kernel defineConsoleSchedule()
+			$this->app->booted(function() {
+
+				// Register our scheduler (must be done in app->booted afer all providers are finished)
+				$this->app->instance('Illuminate\Console\Scheduling\Schedule', $schedule = new Schedule);
+
+				// Define our schedules
+				$schedule->call(function() {
+					echo "hi";
+				})->everyMinute();
+
+			});
+		}*/
 	}
 
 	/**
