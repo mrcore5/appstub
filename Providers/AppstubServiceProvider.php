@@ -71,6 +71,9 @@ class AppstubServiceProvider extends ServiceProvider
 
 		// Register testing environment
 		$this->registerTestingEnvironment();
+
+		// Register mrcore modules
+		$this->registerModules();
 	}
 
 	/**
@@ -125,7 +128,7 @@ class AppstubServiceProvider extends ServiceProvider
 		#	\Mrcore\Appstub\Console\Commands\AppCommand::class
 		#]);
 	}
-	
+
 	/**
 	 * Define the published resources and configs.
 	 *
@@ -265,6 +268,18 @@ class AppstubServiceProvider extends ServiceProvider
 		if ($this->app->environment('testing')) {
 			//
 		}
+	}
+
+	/**
+	 * Register mrcore modules
+	 *
+	 * @return void
+	 */
+	public function registerModules()
+	{
+		// Register mrcore modules
+		#Module::register('Mrcore\Other', true);
+		#Module::loadViews('Mrcore\Other'); // If you need to use this modules view::
 	}
 
 	/**

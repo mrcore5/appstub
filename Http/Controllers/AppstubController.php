@@ -23,10 +23,10 @@ class AppstubController extends Controller
 		#or if (policy($post)->update($user, $post))
 
 		// Navbar
-        $page = (object) [
-            'key' => $this->tool['ns'],
-            'subkey' => $this->tool['key']
-        ];
+		$page = (object) [
+			'key' => $this->tool['ns'],
+			'subkey' => $this->tool['key']
+		];
 
 		return View::make('appstub::welcome', compact('page'));
 	}

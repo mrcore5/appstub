@@ -6,15 +6,15 @@
 @stop
 
 @section('title')
-	{{ $page->title }}
+	Welcome
 @stop
 
 @section('page-title')
- 	{{ $page->title }}
+ 	mRcore Application
 @stop
 
 @section('page-subtitle')
-	{{ $page->subtitle }}
+	Your new mRcore Application
 @stop
 
 @section('wb-content')
