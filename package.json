@@ -1,0 +1,18 @@
+{
+	"private": true,
+	"name": "mrcore/appstub",
+	"version": "1.0.0",
+	"description": "Mrcore Appstub Application",
+	"main": "webpack.config.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "webpack",
+		"start": "webpack-dev-server",
+		"lint": "eslint . --ext .js --ext .jsx",
+		"stylelint": "stylelint app/assets/css/*",
+		"prod": "gulp --production",
+		"dev": "gulp watch"
+	},
+	"author": "Matthew Reschke <mail@mreschke.com>",
+	"license": "MIT"
+}

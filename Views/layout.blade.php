@@ -1,6 +1,7 @@
 @extends('layout.app')
 @include('layout.templates.app', array('useContainer' => false))
 @include('layout._partials.interior-navigation')
+@include('layout._partials.notify')
 
 @section('css')
 	@parent
@@ -30,10 +31,4 @@
 
 @section('script')
 	@parent
-	<script>
-		console.log('welcome!');
-		notify('notice', 'Welcome!', 'Start creating your new mRCore Application!')
-	</script>
 @stop
-
-@include('layout._partials.notify')

@@ -14,8 +14,8 @@ class ViewComposer
 	public function compose(View $view)
 	{
 		// If you want the wiki post dropown menu to show, this $post is required.
-		$post = Mrcore::post()->prepare();
-		$view->with('post', $post);
+		/*$post = Mrcore::post()->prepare();
+		$view->with('post', $post);*/
 
 		$view->with('navTitle', 'Navigation');
 		$view->with('navItems', array(

@@ -1,8 +1,20 @@
 @extends('appstub::layout')
-@include('layout._partials.interior-navigation')
+
 
 @section('css')
 	@parent
+@stop
+
+@section('title')
+	{{ $page->title }}
+@stop
+
+@section('page-title')
+ 	{{ $page->title }}
+@stop
+
+@section('page-subtitle')
+	{{ $page->subtitle }}
 @stop
 
 @section('wb-content')
@@ -12,10 +24,16 @@
 		<a href="http://laravel.com" target="_blank">
 			<img src="{{ asset('app/mrcore/appstub/images/laravel-logo.png') }}">
 		</a>
-		<div class="quote">{{ Inspiring::quote() }}</div>
 	</div>
 @stop
 
 @section('script')
 	@parent
+	<script>
+		$(function() {
+			console.log('welcome!');
+			notify('notice', 'Welcome!', 'Start creating your new mRCore Application!')
+		});
+	</script>
+
 @stop

@@ -22,8 +22,8 @@ class AppstubController extends Controller
 
 		// Navbar
 		$page = (object) [
-			'title' => 'mRCore Application',
-			'subtitle' => 'Your mRCore Application',
+			'title' => 'mRcore Application',
+			'subtitle' => 'Your mRcore Application',
 			'key' => 'dashboard'
 		];
 
