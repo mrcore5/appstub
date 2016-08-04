@@ -5,6 +5,14 @@
 	@parent
 @stop
 
+@section('page-title')
+    mRcore Application
+@stop
+
+@section('page-subtitle')
+    Your mRcore Application
+@stop
+
 @section('wb-content')
 	@yield('interior-navigation')
 	<div class="quoteBox">

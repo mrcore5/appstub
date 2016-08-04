@@ -6,6 +6,8 @@ use Mrcore;
 
 class AppstubController extends Controller
 {
+	protected $tool = ['ns' => 'it', 'key' => 'perfmon'];
+
 	/**
 	 * Display the welcome page
 	 *
@@ -21,11 +23,10 @@ class AppstubController extends Controller
 		#or if (policy($post)->update($user, $post))
 
 		// Navbar
-		$page = (object) [
-			'title' => 'mRCore Application',
-			'subtitle' => 'Your mRCore Application',
-			'key' => 'dashboard'
-		];
+        $page = (object) [
+            'key' => $this->tool['ns'],
+            'subkey' => $this->tool['key']
+        ];
 
 		return View::make('appstub::welcome', compact('page'));
 	}

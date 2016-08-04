@@ -8,7 +8,6 @@ use Illuminate\Routing\Router;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Console\Scheduling\Schedule;
 
 class AppstubServiceProvider extends ServiceProvider
 {
@@ -49,7 +48,7 @@ class AppstubServiceProvider extends ServiceProvider
 	}
 
 	/**
-	 * Register the application services.
+	 * Register the service provider.
 	 *
 	 * @return void
 	 */
@@ -58,18 +57,14 @@ class AppstubServiceProvider extends ServiceProvider
 		// Mrcore Module Tracking
 		Module::trace(get_class(), __function__);
 
-		// Register facades
-		#$facade = AliasLoader::getInstance();
-		#$facade->alias('Appstub', \Mrcore\Appstub\Facades\Appstub::class);
+		// Register facades and class aliases
+		$this->registerFacades();
 
 		// Register configs
 		$this->registerConfigs();
 
-		// Register IoC bind aliases
-		#$this->app->alias(\Mrcore\Appstub\Appstub::class, \Mrcore\Appstub::class)
-
-		// Register other service providers
-		#$this->app->register(\Mrcore\Appstub\Providers\OtherServiceProvider::class);
+		// Register services
+		$this->registerServices();
 
 		// Register artisan commands
 		$this->registerCommands();
@@ -78,6 +73,59 @@ class AppstubServiceProvider extends ServiceProvider
 		$this->registerTestingEnvironment();
 	}
 
+	/**
+	 * Register facades and class aliases.
+	 *
+	 * @return void
+	 */
+	protected function registerFacades()
+	{
+		#$facade = AliasLoader::getInstance();
+		#$facade->alias('Appstub', \Mrcore\Appstub\Facades\Appstub::class);
+		#class_alias('Some\Long\Class', 'Short');
+	}
+
+	/**
+	 * Register additional configs and merges.
+	 *
+	 * @return void
+	 */
+	protected function registerConfigs()
+	{
+		// Append or overwrite configs
+		#config(['test' => 'hi']);
+
+		// Merge configs
+		#$this->mergeConfigFrom(__DIR__.'/../Config/appstub.php', 'mrcore.appstub');
+	}
+
+	/**
+	 * Register the application and other services.
+	 *
+	 * @return void
+	 */
+	protected function registerServices()
+	{
+		// Register IoC bind aliases and singletons
+		#$this->app->alias(\Mrcore\Appstub\Appstub::class, \Mrcore\Appstub::class)
+		#$this->app->singleton(\Mrcore\Appstub\Appstub::class, \Mrcore\Appstub::class)
+
+		// Register other service providers
+		#$this->app->register(\Mrcore\Appstub\Providers\OtherServiceProvider::class);
+	}
+
+	/**
+	 * Register artisan commands.
+	 * @return void
+	 */
+	protected function registerCommands()
+	{
+		if (!$this->app->runningInConsole()) return;
+		#$this->commands([
+		#	\Mrcore\Appstub\Console\Commands\AppCommand::class
+		#]);
+	}
+	
 	/**
 	 * Define the published resources and configs.
 	 *
@@ -181,8 +229,8 @@ class AppstubServiceProvider extends ServiceProvider
 			// Defer until after all providers booted, or the scheduler instance is removed from Illuminate\Foundation\Console\Kernel defineConsoleSchedule()
 			$this->app->booted(function() {
 
-				// Register our scheduler (must be done in app->booted afer all providers are finished)
-				$this->app->instance('Illuminate\Console\Scheduling\Schedule', $schedule = new Schedule);
+				// Get the scheduler instance
+				$schedule = app('Illuminate\Console\Scheduling\Schedule');
 
 				// Define our schedules
 				$schedule->call(function() {
@@ -204,32 +252,6 @@ class AppstubServiceProvider extends ServiceProvider
 
 		// Register additional css assets with mrcore Layout
 		#Layout::css('css/wiki-bundle.css');
-	}
-
-	/**
-	 * Register additional configs and merges.
-	 *
-	 * @return void
-	 */
-	protected function registerConfigs()
-	{
-		// Append or overwrite configs
-		#config(['test' => 'hi']);
-
-		// Merge configs
-		#$this->mergeConfigFrom(__DIR__.'/../Config/appstub.php', 'mrcore.appstub');
-	}
-
-	/**
-	 * Register artisan commands.
-	 * @return void
-	 */
-	protected function registerCommands()
-	{
-		if (!$this->app->runningInConsole()) return;
-		#$this->commands([
-		#	\Mrcore\Appstub\Console\Commands\AppCommand::class
-		#]);
 	}
 
 	/**
