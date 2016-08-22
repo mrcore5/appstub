@@ -30,6 +30,7 @@ Route::get('/test', function() {
 });
 
 // Route controllers must be last
-Route::controllers([
-	'/' => 'AppstubController'
-]);
+#Route::controllers([
+#	'/' => 'AppstubController'
+#]);
+Route::get('/', 'AppstubController@index');

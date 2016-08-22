@@ -13,7 +13,7 @@ class AppstubController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function getIndex()
+	public function index()
 	{
 		// Permissions and Policies
 		#Gate::denies('update-post', $post) { abort(403); }
