@@ -1,6 +1,7 @@
 <?php namespace Mrcore\Appstub\Providers;
 
 use Gate;
+use View;
 use Event;
 use Layout;
 use Module;
@@ -16,7 +17,7 @@ class AppstubServiceProvider extends ServiceProvider
 	 *
 	 * @var bool
 	 */
-	protected $defer = true;
+	protected $defer = false;
 
 	/**
 	 * Bootstrap the application services.
@@ -30,6 +31,9 @@ class AppstubServiceProvider extends ServiceProvider
 
 		// Register publishers
 		$this->registerPublishers();
+
+		// Register migrations
+		$this->registerMigrations();
 
 		// Register Policies
 		$this->registerPolicies();
@@ -130,6 +134,31 @@ class AppstubServiceProvider extends ServiceProvider
 	}
 
 	/**
+	 * Register test environment overrides
+	 *
+	 * @return void
+	 */
+	public function registerTestingEnvironment()
+	{
+		// Register testing environment
+		if ($this->app->environment('testing')) {
+			//
+		}
+	}
+
+	/**
+	 * Register mrcore modules
+	 *
+	 * @return void
+	 */
+	public function registerModules()
+	{
+		// Register mrcore modules
+		#Module::register('Mrcore\Other', $forceEvenIfConsoleOnly=true);
+		#Module::loadViews('Mrcore\Other'); // If you need to use this modules view::
+	}
+
+	/**
 	 * Define the published resources and configs.
 	 *
 	 * @return void
@@ -162,6 +191,17 @@ class AppstubServiceProvider extends ServiceProvider
 			"$path/Database/Seeds" => base_path('/database/seeds'),
 		], 'mrcore.appstub.seeds');
 		*/
+	}
+
+	/**
+	 * Register the migrations.
+	 *
+	 * @return void
+	 */
+	protected function registerMigrations()
+	{
+		if (!$this->app->runningInConsole()) return;
+		#$this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 	}
 
 	/**
@@ -211,7 +251,7 @@ class AppstubServiceProvider extends ServiceProvider
 	protected function registerListeners()
 	{
 		// Login event listener
-		#Event::listen('auth.login', function($user) {
+		#Event::listen('Illuminate\Auth\Events\Login', function($user) {
 			//
 		#});
 
@@ -255,31 +295,9 @@ class AppstubServiceProvider extends ServiceProvider
 
 		// Register additional css assets with mrcore Layout
 		#Layout::css('css/wiki-bundle.css');
-	}
 
-	/**
-	 * Register test environment overrides
-	 *
-	 * @return void
-	 */
-	public function registerTestingEnvironment()
-	{
-		// Register testing environment
-		if ($this->app->environment('testing')) {
-			//
-		}
-	}
-
-	/**
-	 * Register mrcore modules
-	 *
-	 * @return void
-	 */
-	public function registerModules()
-	{
-		// Register mrcore modules
-		#Module::register('Mrcore\Other', true);
-		#Module::loadViews('Mrcore\Other'); // If you need to use this modules view::
+		// Share data wiht all views
+		#View::share('key', 'value');
 	}
 
 	/**
