@@ -6,17 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 class AppstubSeeder extends Seeder
 {
 
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		Model::unguard();
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Model::unguard();
 
-		// Order is Critical
-		//$this->call('AppstubTestSeeder');
-	}
-
+        // Order is Critical
+        //$this->call('AppstubTestSeeder');
+    }
 }

@@ -2,8 +2,8 @@
 
 class Test
 {
-	public static function hi()
-	{
-		return "HI there from support";
-	}
+    public static function hi()
+    {
+        return "HI there from support";
+    }
 }

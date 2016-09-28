@@ -16,21 +16,19 @@ View::composer('appstub::layout', 'Mrcore\Appstub\Http\Composers\ViewComposer');
 
 // Admin Routes
 // FIXME add middleware?..used to be a filter, now deprecated in laravel
-Route::group(array('prefix' => 'admin'), function() {
-
-	Route::get('/', function() {
-		return "Welcome to admin";
-	});
-
+Route::group(array('prefix' => 'admin'), function () {
+    Route::get('/', function () {
+        return "Welcome to admin";
+    });
 });
 
 // Test
-Route::get('/test', function() {
-	return Mrcore\Appstub\Support\Test::hi();
+Route::get('/test', function () {
+    return Mrcore\Appstub\Support\Test::hi();
 });
 
 // Route controllers must be last
 #Route::controllers([
-#	'/' => 'AppstubController'
+#    '/' => 'AppstubController'
 #]);
 Route::get('/', 'AppstubController@index');

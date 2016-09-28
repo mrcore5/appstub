@@ -7,5 +7,5 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 
 abstract class Job
 {
-	use InteractsWithQueue, Queueable, SerializesModels, DispatchesJobs;
+    use InteractsWithQueue, Queueable, SerializesModels, DispatchesJobs;
 }

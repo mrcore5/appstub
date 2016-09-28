@@ -4,21 +4,21 @@
 @include('layout._partials.notify')
 
 @section('css')
-	@parent
-	<style>
-		.quoteBox {
-			text-align: center;
-			vertical-align: middle;
-		}
-		.title {
-			font-size: 48px;
-			margin-bottom: 40px;
-		}
-		.quote {
-			font-size: 24px;
-			margin: 60px 0px 60px 0px;
-		}
-	</style>
+    @parent
+    <style>
+        .quoteBox {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .title {
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+        .quote {
+            font-size: 24px;
+            margin: 60px 0px 60px 0px;
+        }
+    </style>
 @stop
 
 @section('subheader-title')
@@ -26,9 +26,9 @@
 @stop
 
 @section('content')
-	@yield('template')
+    @yield('template')
 @stop
 
 @section('script')
-	@parent
+    @parent
 @stop

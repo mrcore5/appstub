@@ -2,26 +2,25 @@
 
 class DoSomething extends Job
 {
-	protected $someData;
+    protected $someData;
 
-	/**
-	 * Create a new job instance
-	 *
-	 * @param string $someData
-	 */
-	public function __construct($someData)
-	{
-		$this->someData = $someData;
-	}
+    /**
+     * Create a new job instance
+     *
+     * @param string $someData
+     */
+    public function __construct($someData)
+    {
+        $this->someData = $someData;
+    }
 
-	/**
-	 * Execute the job.
-	 *
-	 * @return void
-	 */
-	public function handle()
-	{
-		//
-	}
-
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        //
+    }
 }

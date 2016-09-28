@@ -1,25 +1,25 @@
 {
-	"name": "mrcore/appstub",
-	"type": "library",
-	"description": "Mrcore Appstub Application",
-	"keywords": ["laravel", "mrcore", "mrcore5", "framework"],
-	"license": "MIT",
-	"support": {
-		"issues": "https://github.com/mrcore5/appstub/issues",
-		"source": "https://github.com/mrcore5/appstub"
-	},
-	"authors": [
-		{
-			"name": "Matthew Reschke",
-			"email": "mail@mreschke.com"
-		}
-	],
-	"autoload": {
-		"classmap": [
-			"Database"
-		],
-		"psr-4": {
-			"Mrcore\\Appstub\\": ""
-		}
-	}
+    "name": "mrcore/appstub",
+    "type": "library",
+    "description": "Mrcore Appstub Application",
+    "keywords": ["laravel", "mrcore", "mrcore5", "framework"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/mrcore5/appstub/issues",
+        "source": "https://github.com/mrcore5/appstub"
+    },
+    "authors": [
+        {
+            "name": "Matthew Reschke",
+            "email": "mail@mreschke.com"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "Database"
+        ],
+        "psr-4": {
+            "Mrcore\\Appstub\\": ""
+        }
+    }
 }
