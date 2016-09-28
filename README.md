@@ -1,35 +1,62 @@
-## Mrcore Appstub
+# appstub-laravel53
+Laravel 5.3 looking appstub for mrcore5
 
-This is the mRcore default app stub for creating quick wiki apps.
 
-## What Is Mrcore
+# Manually Wireup Appstub from Laravel
 
-Mrcore is a set of Laravel and Lumen components used to build various systems.
-It is a framework, a development platform and a CMS.  It is a modularized version of Laravel
-providing better package development support.  Think of Laravel 4.x workbenches on steroids.
+* Make `packages` folder
+* add `/packages` to main .gitignore
+* Symlink this AppstubLaravel53 into `packages/mrcore/appstub`
+* Add type path reposotyro to main composer.json and require-dev mrcore/appstub *@dev
+* composer dump-autoload
 
-See https://github.com/mrcore5/framework for details and installation instructions.
 
-## Official Documentation
+# Folder Structure
 
-If you use [mrcore5](https://github.com/mrcore5/framework) with the
-[wiki](https://github.com/mrcore5/wiki) module then you can build great wiki apps using this stub.
+New mrcore app folder structure that follows Laravel 5.3
 
-To get an app started quickly you can run the wiki command
+Should be absolute minimal, and use MAKERS to build rest
 
-    ./artisan mrcore:wiki:app:make mevendor/appname
 
-This will create a folder `Apps/Mevendor/Appname` and git clone this app stub repo.  This repo
-is the template of a great wiki app.
+# Makers to build
 
-From there, you can wire up this app into a wiki post.  Create a new wiki post and goto the 
-advanced tab of the edit post page.  Enter a static route like `apps/myapp` and link new app in the
-workbench forge by entering `mevendor/appname`.  Save the post and you should see a nice new app!
+make:factory (model factory)
+make:command
+make:controller
+make:event
+make:job
+make:listener
+make:mail
+make:middleware
+make:migration
+make:model
+make:notification
+make:policy
+make:provider
+make:seeder
+make:test
 
-## Contributing
+NOTUSED(why?)
+    make:auth
+    make:request
 
-Thank you for considering contributing to the mRcore framework!  Fork and pull!
+New not in laravel
+    make:repo (?? mreschke/repo)
+    make:facade
 
-### License
+Maybe thwor in new mreschke/repo make:repo ?
 
-Mrcore is open-sourced software licensed under the [MIT license](http://mreschke.com/license/mit)
+# To Do
+
+
+
+
+# Stubs
+
+The stubs should be inside this appstub becuase each appstub will
+have different stubs.  But the actual commands that MAKE and INSTALL these stubs
+should be in mrcore5/foundation.  Foundation will simply look for
+the stubs path and may have separate install classes for each type of
+app stub...course then they are NOT self contained and can't be built
+by someone else.  3rd party appstubs would be cool if self-contained.
+

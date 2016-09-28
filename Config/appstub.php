@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Mrcore Foundation Configuration File
+ * Mrcore App Configuration File
  *
  * All configs use env() so you can override in your own .env
  * You can also publish the entire configuration with
  * ./artisan vendor:publish --tag="mrcore.appstub.configs"
  * This config is merged, meaning it handles partial overrides
- * Access with Config::get('mrcore.appstub.test')
+ * Access with config('mrcore.appstub.test')
  */
 return [
 
