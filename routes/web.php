@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/test', function () {
+Route::get('/app', function () {
     #$test = config('mrcore.appstub.test'); dd($test);
     return view('appstub::welcome');
 });

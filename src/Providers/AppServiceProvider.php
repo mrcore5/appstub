@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application services.
      *
-     * @return void
+     * @return voidw
      */
     public function boot(Kernel $kernel, Router $router)
     {
@@ -102,9 +102,10 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerConsole()
     {
+        // Console only
         if (!$this->app->runningInConsole()) {
             return;
-        } //Console only
+        }
 
         // Firing up the kernel also defines the schedules there
         $kernel = $this->app->make(\Mrcore\Appstub\Console\Kernel::class);
@@ -117,9 +118,11 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerTesting()
     {
+        // Console only
         if (!$this->app->runningInConsole()) {
             return;
-        } //Console only
+        }
+
         if (!$this->app->environment('testing')) {
             return;
         } // Testing only
@@ -134,27 +137,46 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function bootPublishers()
     {
+        // Console only
         if (!$this->app->runningInConsole()) {
             return;
-        } //Console only
+        }
 
         // Config publishing rules
+        // Configs are also accessible where they are in the package
+        // becuase of registerConfigs(), but if you wanted to publish them
+        // to override, this is how.
         // ./artisan vendor:publish --tag="mrcore.appstub.configs"
-        $this->publishes([
-            $this->appPath('congig') => base_path('config/mrcore'),
-        ], 'mrcore.appstub.configs');
+        #$this->publishes([
+        #    $this->appPath('congig') => base_path('config/mrcore'),
+        #], 'mrcore.appstub.configs');
 
         // Migration publishing rules
+        // Migrations are also accessible where they are in the package
+        // becuase of bootMigrations, but if you wanted to publish them
+        // to override, this is how.
         // ./artisan vendor:publish --tag="mrcore.appstub.migrations"
-        $this->publishes([
-            $this->appPath('database/migrations') => base_path('database/migrations'),
-        ], 'mrcore.appstub.migrations');
+        #$this->publishes([
+        #    $this->appPath('database/migrations') => base_path('database/migrations'),
+        #], 'mrcore.appstub.migrations');
 
         // Seed publishing rules
+        // Seeds are also accessible where they are in the package
+        // becuase of how mrcore seeds, but if you wanted to publish them
+        // to override, this is how.
         // ./artisan vendor:publish --tag="mrcore.appstub.seeds"
-        $this->publishes([
-            $this->appPath('database/seeds') => base_path('database/seeds'),
-        ], 'mrcore.appstub.seeds');
+        #$this->publishes([
+        #    $this->appPath('database/seeds') => base_path('database/seeds'),
+        #], 'mrcore.appstub.seeds');
+
+        // Public asset publishing rules
+        // I don't generally publish public assets because mrcore
+        // has a great asset manager that lets you access the assets
+        // right where they are from teh package, no need to publish or symlink
+        // ./artisan vendor:publish --tag="mrcore.appstub.public"
+        #$this->publishes([
+        #    $this->appPath('public') => public_path('vendor/mrcore/appstub'),
+        #], 'mrcore.appstub.public');
     }
 
     /**
@@ -164,9 +186,10 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function bootMigrations()
     {
+        // Console only
         if (!$this->app->runningInConsole()) {
             return;
-        } //Console only
+        }
 
         $this->loadMigrationsFrom($this->appPath('database/migrations'));
     }
@@ -180,9 +203,10 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function bootMiddleware(Kernel $kernel, Router $router)
     {
+        // Web only
         if ($this->app->runningInConsole()) {
             return;
-        } //Web only
+        }
 
         // Get apps kernel
         $appKernel = $this->app->make(\Mrcore\Appstub\Http\Kernel::class);
@@ -212,11 +236,13 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function bootViews()
     {
+        // Web only
         if ($this->app->runningInConsole()) {
             return;
-        } //Web only
+        }
 
         // Load views from path
+        // loadViewsFrom is same as View::addNamespace()
         $this->loadViewsFrom($this->appPath('resources/views'), 'appstub');
 
         // Share global value wiht all views

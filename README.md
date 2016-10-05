@@ -6,8 +6,8 @@ Laravel 5.3 looking appstub for mrcore5
 
 * Make `packages` folder
 * add `/packages` to main .gitignore
-* Symlink this AppstubLaravel53 into `packages/mrcore/appstub`
-* Add type path reposotyro to main composer.json and require-dev mrcore/appstub *@dev
+* Symlink this Appstub into `packages/mrcore/appstub`
+* Add type path reposotory to main composer.json and require-dev mrcore/appstub *@dev
 * composer dump-autoload
 
 
