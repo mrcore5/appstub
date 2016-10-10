@@ -11,7 +11,13 @@
 |
 */
 
-Route::get('/app', function () {
+
+Route::get('/', function () {
     #$test = config('mrcore.appstub.test'); dd($test);
-    return view('appstub::welcome');
+    return view('appstub::layout', [
+        'page' => 'home',
+        'data' => [
+            'user' => 'matthew'
+        ]
+    ]);
 });
