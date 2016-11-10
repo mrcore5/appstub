@@ -13,4 +13,18 @@ return [
 
     'test' => env('APPSTUB_TEST', 'this is a test'),
 
+    // These app paths for module and console command usage
+    'paths' => [
+        'psr4' => '',
+        'assets' => 'Assets',
+        'public' => 'Assets',
+        'config' => 'Config',
+        'database' => 'Database',
+        'migrations' => 'Database/Migrations',
+        'factories' => 'Database/Factories',
+        'seeds' => 'Database/Seeds',
+        'tests' => 'Tests',
+        'views' => 'Views',
+    ],
+
 ];
