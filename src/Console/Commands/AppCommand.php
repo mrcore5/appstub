@@ -22,6 +22,7 @@ class AppCommand extends Command
         $this->name = 'appstub';
         $this->ns = 'Mrcore\Appstub';
         $this->path = ['vendor/mrcore/appstub', '../Apps/Mrcore/Appstub'];
+        $this->paths = config('dynatron.roams.paths');
         $this->connection = 'appstub';
         $this->seeder = 'AppstubSeeder';
         parent::__construct();
