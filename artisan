@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Set to your vendor:package app name
+app="mrcore:appstub"
+
+################################################################################
+function getScript {
+    # This is the only way to get actual script path even if
+    # you are accessing the script from a symlink.  On linux
+    # there is an easier readlink -f option, but does not work on mac/bsd
+    TARGET_FILE=$0
+
+    cd `dirname $TARGET_FILE`
+    TARGET_FILE=`basename $TARGET_FILE`
+
+    # Iterate down a (possible) chain of symlinks
+    while [ -L "$TARGET_FILE" ]
+    do
+        TARGET_FILE=`readlink $TARGET_FILE`
+        cd `dirname $TARGET_FILE`
+        TARGET_FILE=`basename $TARGET_FILE`
+    done
+
+    # Compute the canonicalized name by finding the physical path
+    # for the directory we're in and appending the target file.
+    PHYS_DIR=`pwd -P`
+    RESULT=$PHYS_DIR/$TARGET_FILE
+    echo $RESULT
+}
+
+# Get myself and path
+script=$(getScript)
+path=$(dirname $script)
+
+# Find actual apps artisan command
+# Works if app in ../Apps/Vendor/Package, or vendors/vendor/package or packages/vendor/package
+if [ -f "$path/../../../System/artisan" ]; then
+    artisan=$(cd $path && cd ../../../System && pwd)/artisan
+elif [ -f "$path/../../../artisan" ]; then
+    artisan=$(cd $path && cd ../../.. && pwd)/artisan
+fi
+
+if [ "$1" == "" ];
+then
+    $artisan | grep $app
+else
+    $artisan $app:$1 "${@:2}"
+fi
