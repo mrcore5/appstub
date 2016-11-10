@@ -1,9 +1,5 @@
 <?php namespace Mrcore\Appstub\Http\Controllers;
 
-use Gate;
-use View;
-use Mrcore;
-
 class AppstubController extends Controller
 {
     protected $tool = ['ns' => 'it', 'key' => 'perfmon'];
@@ -28,6 +24,6 @@ class AppstubController extends Controller
             'subkey' => $this->tool['key']
         ];
 
-        return View::make('appstub::welcome', compact('page'));
+        return view('appstub::welcome', compact('page'));
     }
 }

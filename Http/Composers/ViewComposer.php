@@ -18,16 +18,13 @@ class ViewComposer
         $view->with('post', $post);*/
 
         $view->with('navTitle', 'Navigation');
-        $view->with('navItems', array(
-                ['key' => 'dashboard', 'display' => 'Dashboard', 'url' => ''],
-                ['key' => 'menuitem1', 'display' => 'MenuItem 1', 'url' => ''],
-                ['key' => 'menuitem2', 'display' => 'MenuItem 2',
-                    'subnav' => array(
-                        ['key' => 'submenuitem1', 'display' => 'Sub MenuItem 1', 'url' => ''],
-                        ['key' => 'submenuitem2', 'display' => 'Sub MenuItem 2', 'url' => '']
-                    )
-                ]
-            )
-        );
+        $view->with('navItems', [
+            ['key' => 'dashboard', 'display' => 'Dashboard', 'url' => ''],
+            ['key' => 'menuitem1', 'display' => 'MenuItem 1', 'url' => ''],
+            ['key' => 'menuitem2', 'display' => 'MenuItem 2', 'subnav' => [
+                ['key' => 'submenuitem1', 'display' => 'Sub MenuItem 1', 'url' => ''],
+                ['key' => 'submenuitem2', 'display' => 'Sub MenuItem 2', 'url' => '']
+            ]]
+        ]);
     }
 }
