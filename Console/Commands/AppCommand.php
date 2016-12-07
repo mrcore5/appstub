@@ -19,7 +19,7 @@ class AppCommand extends Command
      */
     public function __construct()
     {
-        $this->name = 'appstub';
+        $this->app = 'appstub';
         $this->ns = 'Mrcore\Appstub';
         $this->path = ['vendor/mrcore/appstub', '../Apps/Mrcore/Appstub'];
         $this->paths = config('mrcore.appstub.paths');
