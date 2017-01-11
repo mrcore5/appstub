@@ -171,9 +171,6 @@ class AppstubServiceProvider extends ServiceProvider
             return;
         }
         /*
-        // Register additional css assets with mrcore Layout
-        Layout::css('css/wiki-bundle.css');
-
         // App base path
         $path = realpath(__DIR__.'/../');
 
