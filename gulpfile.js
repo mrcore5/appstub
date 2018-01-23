@@ -20,6 +20,6 @@ require('laravel-elixir-vue');
 });*/
 
 
-elixir(mix => {
-    mix.webpack('app.js');
-});
+//elixir(mix => {
+//    mix.webpack('app.js');
+//});
