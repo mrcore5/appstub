@@ -1,7 +1,7 @@
 {
     "name": "mrcore/appstub",
     "version": "1.0.0",
-    "author": "Matthew Reschke <mail@mreschke.com>",
+    "author": "Mrcore Developer <email@example.com>",
     "license": "MIT",
     "private": true,
     "description": "Mrcore Appstub Application",
