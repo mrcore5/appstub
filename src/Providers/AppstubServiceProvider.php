@@ -172,24 +172,24 @@ class AppstubServiceProvider extends ServiceProvider
         }
         /*
         // App base path
-        $path = realpath(__DIR__.'/../');
+        $path = realpath(__DIR__.'/../../');
 
         // Config publishing rules
         // ./artisan vendor:publish --tag="mrcore.appstub.configs"
         $this->publishes([
-            "$path/Config" => base_path('/config/mrcore'),
+            "$path/config" => base_path('/config/mrcore'),
         ], 'mrcore.appstub.configs');
 
         // Migration publishing rules
         // ./artisan vendor:publish --tag="mrcore.appstub.migrations"
         $this->publishes([
-            "$path/Database/Migrations" => base_path('/database/migrations'),
+            "$path/database/migrations" => base_path('/database/migrations'),
         ], 'mrcore.appstub.migrations');
 
         // Seed publishing rules
         // ./artisan vendor:publish --tag="mrcore.appstub.seeds"
         $this->publishes([
-            "$path/Database/Seeds" => base_path('/database/seeds'),
+            "$path/database/seeds" => base_path('/database/seeds'),
         ], 'mrcore.appstub.seeds');
         */
     }

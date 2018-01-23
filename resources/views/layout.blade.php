@@ -1,34 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Meta Information -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout.app')
+@include('layout.templates.app', array('useContainer' => false))
+@include('layout._partials.interior-navigation')
+@include('layout._partials.notify')
 
-    <title>@yield('title', config('app.name'))</title>
+@section('css')
+    @parent
+    <style>
+        .quoteBox {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .title {
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+        .quote {
+            font-size: 24px;
+            margin: 60px 0px 60px 0px;
+        }
+    </style>
+@stop
 
-    <!-- CSS -->
-    <link href="/css/app.css" rel="stylesheet">
+@section('subheader-title')
+    <i class="fa fa-star"></i> mRcore App
+@stop
 
-    <!-- Global Spark Object -->
-    <script>
-    </script>
-</head>
+@section('content')
+    @yield('template')
+@stop
 
-<body v-cloak>
-
-    <div id="app">
-
-        <!-- Navigation -->
-
-        <!-- Main Content -->
-        <div class="container">
-            <{{ $page }} :data=<?= json_encode($data) ?>></{{ $page }}>
-        </div>
-
-        <!-- JavaScript -->
-        <script src={{ asset('app/mrcore/appstub/js/app.js') }}></script>
-    </div>
-</body>
-</html>
+@section('script')
+    @parent
+@stop

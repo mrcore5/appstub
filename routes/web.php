@@ -11,13 +11,7 @@
 |
 */
 
+// App global view composer
+View::composer('appstub::layout', 'Mrcore\Appstub\Http\Composers\ViewComposer');
 
-Route::get('/', function () {
-    #$test = config('mrcore.appstub.test'); dd($test);
-    return view('appstub::layout', [
-        'page' => 'home',
-        'data' => [
-            'user' => 'matthew'
-        ]
-    ]);
-});
+Route::get('/', 'AppstubController@index');

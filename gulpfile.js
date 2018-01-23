@@ -1,7 +1,5 @@
 const elixir = require('laravel-elixir');
 
-require('laravel-elixir-vue');
-
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -13,13 +11,20 @@ require('laravel-elixir-vue');
  |
  */
 
-// original
-/*elixir(mix => {
-    mix.sass('app.scss')
-       .webpack('app.js');
-});*/
+/*elixir(function(mix) {
 
+    mix.styles([
+        "yamm.css",
+    ], 'public/css/theme-bundle.css', 'resources/assets/css');
 
-//elixir(mix => {
-//    mix.webpack('app.js');
-//});
+    mix.scripts([
+        "jquery-2.1.4.min.js",
+    ], 'public/js/theme-bundle.js', 'resources/assets/js');
+
+    mix.scripts([
+        "html5shiv.js",
+        "respond.min.js"
+    ], 'public/js/shiv-bundle.js', 'resources/assets/js');
+
+});
+*/
