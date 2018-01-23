@@ -11,7 +11,7 @@
  */
 return [
 
-    'test' => env('APPSTUB_TEST', 'this is a test'),
+    'test' => env('ONEOFYOUR_ENV_VARS', 'this is a test'),
 
     // These app paths for module and console command usage
     'paths' => [
