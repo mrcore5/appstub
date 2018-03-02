@@ -24,7 +24,10 @@ return [
         'factories' => 'Database/Factories',
         'seeds' => 'Database/Seeds',
         'tests' => 'Tests',
+        'routes' => 'Http/routes.php',
+        'route_prefix' => null,
         'views' => 'Views',
+        'view_prefix' => 'appstub',
     ],
 
 ];
