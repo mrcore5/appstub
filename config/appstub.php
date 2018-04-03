@@ -24,7 +24,7 @@ return [
         'factories' => 'database/factories',
         'seeds' => 'database/seeds',
         'tests' => 'tests',
-        'routes' => 'routes/web.php'
+        'routes' => 'routes/web.php',
         'route_prefix' => null,
         'views' => 'resources/views',
         'view_prefix' => 'appstub',

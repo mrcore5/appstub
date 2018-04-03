@@ -20,6 +20,31 @@ class AppstubServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
+     * Register the service provider.
+     * @return void
+     */
+    public function register()
+    {
+        // Mrcore Module Tracking
+        Module::trace(get_class(), __function__);
+
+        // Register facades and class aliases
+        $this->registerFacades();
+
+        // Register configs
+        $this->registerConfigs();
+
+        // Register services
+        $this->registerServices();
+
+        // Register testing environment
+        $this->registerTestingEnvironment();
+
+        // Register mrcore modules
+        $this->registerModules();
+    }
+
+    /**
      * Bootstrap the application services.
      *
      * @return void
@@ -49,35 +74,9 @@ class AppstubServiceProvider extends ServiceProvider
 
         // Register mrcore layout overrides
         $this->registerLayout();
-    }
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        // Mrcore Module Tracking
-        Module::trace(get_class(), __function__);
-
-        // Register facades and class aliases
-        $this->registerFacades();
-
-        // Register configs
-        $this->registerConfigs();
-
-        // Register services
-        $this->registerServices();
 
         // Register artisan commands
         $this->registerCommands();
-
-        // Register testing environment
-        $this->registerTestingEnvironment();
-
-        // Register mrcore modules
-        $this->registerModules();
     }
 
     /**
@@ -122,30 +121,14 @@ class AppstubServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register artisan commands.
-     * @return void
-     */
-    protected function registerCommands()
-    {
-        if (!$this->app->runningInConsole()) {
-            return;
-        }
-        $this->commands([
-            \Mrcore\Appstub\Console\Commands\AppCommand::class
-        ]);
-    }
-
-    /**
      * Register test environment overrides
      *
      * @return void
      */
     public function registerTestingEnvironment()
     {
-        // Register testing environment
-        if ($this->app->environment('testing')) {
-            //
-        }
+        // Does not apply if NOT running in 'testing' mode
+        if (!$this->app->environment('testing')) return;
     }
 
     /**
@@ -167,9 +150,9 @@ class AppstubServiceProvider extends ServiceProvider
      */
     protected function registerPublishers()
     {
-        if (!$this->app->runningInConsole()) {
-            return;
-        }
+        // Only applies if running in console
+        if (!$this->app->runningInConsole()) return;
+
         /*
         // App base path
         $path = realpath(__DIR__.'/../../');
@@ -201,9 +184,10 @@ class AppstubServiceProvider extends ServiceProvider
      */
     protected function registerMigrations()
     {
-        if (!$this->app->runningInConsole()) {
-            return;
-        }
+        // Only applies if running in console
+        if (!$this->app->runningInConsole()) return;
+
+        // Register Migrations
         #$this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
 
@@ -235,10 +219,13 @@ class AppstubServiceProvider extends ServiceProvider
      *
      * @param Illuminate\Contracts\Http\Kernel $kernel
      * @param \Illuminate\Routing\Router $router
-     * @return  void
+     * @return void
      */
     protected function registerMiddleware(Kernel $kernel, Router $router)
     {
+        // Does not apply if running in console
+        if ($this->app->runningInConsole()) return;
+
         // Register global middleware
         #$kernel->pushMiddleware('Mrcore\Appstub\Http\Middleware\DoSomething');
 
@@ -269,8 +256,11 @@ class AppstubServiceProvider extends ServiceProvider
      */
     protected function registerSchedules()
     {
+        // Only applies if running in console
+        if (!$this->app->runningInConsole()) return;
+
         // Register all task schedules for this hostname ONLY if running from the schedule:run command
-        /*if (app()->runningInConsole() && isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] == 'schedule:run') {
+        /*if (isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] == 'schedule:run') {
 
             // Defer until after all providers booted, or the scheduler instance is removed from Illuminate\Foundation\Console\Kernel defineConsoleSchedule()
             $this->app->booted(function() {
@@ -294,9 +284,8 @@ class AppstubServiceProvider extends ServiceProvider
      */
     protected function registerLayout()
     {
-        if ($this->app->runningInConsole()) {
-            return;
-        }
+        // Does not apply if running in console
+        if ($this->app->runningInConsole()) return;
 
         // Register additional css assets with mrcore Layout
         #Layout::css('css/wiki-bundle.css');
@@ -306,13 +295,30 @@ class AppstubServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register artisan commands.
+     *
+     * @return void
+     */
+    protected function registerCommands()
+    {
+        // Only applies if running in console
+        if (!$this->app->runningInConsole()) return;
+
+        // Register Commands
+        $this->commands([
+            \Mrcore\Appstub\Console\Commands\AppCommand::class
+        ]);
+    }
+
+    /**
      * Get the services provided by the provider.
      *
      * @return array
      */
     public function provides()
     {
-        // Only required if $defer = true and you add bindings
+        // Only required if $defer = true and you add bindings in register()
+        // Only use if the provier is super simple and basically only has a simle binding
         //return ['Mrcore\Appstub\Stuff', 'other bindings...'];
     }
 }
