@@ -1,8 +1,8 @@
-<?php namespace Dynatron\Roams;
+<?php namespace Mrcore\Appstub\Tests;
 
-use TestCase;
-use Exception;
+use Tests\TestCase;
 use Mockery as m;
+use Exception;
 
 class AAAPlayTest extends TestCase
 {
