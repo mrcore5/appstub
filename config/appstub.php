@@ -16,7 +16,7 @@ return [
     // These app paths for module and console command usage
     'paths' => [
         'psr4' => 'src',
-        'assets' => 'resources/assets',
+        'assets' => 'resources',
         'public' => 'public',
         'config' => 'config',
         'database' => 'database',
