@@ -25,7 +25,7 @@ return [
         'seeds' => 'database/seeds',
         'tests' => 'tests',
         'routes' => 'routes/web.php',
-        'route_prefix' => null,
+        'route_prefix' => 'appstub',
         'views' => 'resources/views',
         'view_prefix' => 'appstub',
     ],
