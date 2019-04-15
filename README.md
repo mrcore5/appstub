@@ -1,5 +1,6 @@
-# appstub-laravel53
-Laravel 5.3 looking appstub for mrcore5
+# appstub
+
+Laravel 5.8 looking appstub for mrcore5
 
 
 # Manually Wireup Appstub from Laravel
@@ -13,7 +14,7 @@ Laravel 5.3 looking appstub for mrcore5
 
 # Folder Structure
 
-New mrcore app folder structure that follows Laravel 5.3
+New mrcore app folder structure that follows Laravel 5.8
 
 Should be absolute minimal, and use MAKERS to build rest
 
